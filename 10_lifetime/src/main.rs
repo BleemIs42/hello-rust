@@ -1,4 +1,3 @@
-
 fn main() {
     let string1 = String::from("long string is long");
     let result;
