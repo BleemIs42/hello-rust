@@ -1,0 +1,61 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at src/main.rs:4:11: 4:11
+    let _1: &str;                        // in scope 0 at src/main.rs:11:9: 11:14
+    scope 1 {
+        debug hello => _1;               // in scope 1 at src/main.rs:11:9: 11:14
+        let _2: std::string::String;     // in scope 1 at src/main.rs:12:9: 12:14
+        scope 2 {
+            debug world => _2;           // in scope 2 at src/main.rs:12:9: 12:14
+            let _3: std::string::String; // in scope 2 at src/main.rs:13:9: 13:17
+            scope 3 {
+                debug cp_world => _3;    // in scope 3 at src/main.rs:13:9: 13:17
+                let _4: std::string::String; // in scope 3 at src/main.rs:14:9: 14:16
+                scope 4 {
+                    debug cc_word => _4; // in scope 4 at src/main.rs:14:9: 14:16
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at src/main.rs:11:9: 11:14
+        _1 = const "hello!";             // scope 0 at src/main.rs:11:17: 11:25
+                                         // ty::Const
+                                         // + ty: &str
+                                         // + val: Value(Slice { data: Allocation { bytes: [104, 101, 108, 108, 111, 33], relocations: Relocations(SortedMap { data: [] }), init_mask: InitMask { blocks: [63], len: Size { raw: 6 } }, size: Size { raw: 6 }, align: Align { pow2: 0 }, mutability: Not, extra: () }, start: 0, end: 6 })
+                                         // mir::Constant
+                                         // + span: src/main.rs:11:17: 11:25
+                                         // + literal: Const { ty: &str, val: Value(Slice { data: Allocation { bytes: [104, 101, 108, 108, 111, 33], relocations: Relocations(SortedMap { data: [] }), init_mask: InitMask { blocks: [63], len: Size { raw: 6 } }, size: Size { raw: 6 }, align: Align { pow2: 0 }, mutability: Not, extra: () }, start: 0, end: 6 }) }
+        StorageLive(_2);                 // scope 1 at src/main.rs:12:9: 12:14
+        _2 = <String as From<&str>>::from(const "world") -> bb1; // scope 1 at src/main.rs:12:17: 12:38
+                                         // mir::Constant
+                                         // + span: src/main.rs:12:17: 12:29
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(&str) -> std::string::String {<std::string::String as std::convert::From<&str>>::from}, val: Value(Scalar(<ZST>)) }
+                                         // ty::Const
+                                         // + ty: &str
+                                         // + val: Value(Slice { data: Allocation { bytes: [119, 111, 114, 108, 100], relocations: Relocations(SortedMap { data: [] }), init_mask: InitMask { blocks: [31], len: Size { raw: 5 } }, size: Size { raw: 5 }, align: Align { pow2: 0 }, mutability: Not, extra: () }, start: 0, end: 5 })
+                                         // mir::Constant
+                                         // + span: src/main.rs:12:30: 12:37
+                                         // + literal: Const { ty: &str, val: Value(Slice { data: Allocation { bytes: [119, 111, 114, 108, 100], relocations: Relocations(SortedMap { data: [] }), init_mask: InitMask { blocks: [31], len: Size { raw: 5 } }, size: Size { raw: 5 }, align: Align { pow2: 0 }, mutability: Not, extra: () }, start: 0, end: 5 }) }
+    }
+
+    bb1: {
+        StorageLive(_3);                 // scope 2 at src/main.rs:13:9: 13:17
+        _3 = move _2;                    // scope 2 at src/main.rs:13:20: 13:25
+        StorageLive(_4);                 // scope 3 at src/main.rs:14:9: 14:16
+        _4 = move _3;                    // scope 3 at src/main.rs:14:19: 14:27
+        _0 = const ();                   // scope 0 at src/main.rs:4:11: 16:2
+        drop(_4) -> bb2;                 // scope 3 at src/main.rs:16:1: 16:2
+    }
+
+    bb2: {
+        StorageDead(_4);                 // scope 3 at src/main.rs:16:1: 16:2
+        StorageDead(_3);                 // scope 2 at src/main.rs:16:1: 16:2
+        StorageDead(_2);                 // scope 1 at src/main.rs:16:1: 16:2
+        StorageDead(_1);                 // scope 0 at src/main.rs:16:1: 16:2
+        return;                          // scope 0 at src/main.rs:16:2: 16:2
+    }
+}
